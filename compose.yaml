@@ -1,0 +1,11 @@
+services:
+  app:
+    platform: "linux/amd64"
+    build: .
+    ports:
+      - "3000:3000"
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app
