@@ -19,23 +19,23 @@
     <button id="roastBtn"
       class="bg-purple-500 text-white px-6 py-3 rounded-full hover:bg-purple-600 transition duration-300 transform hover:scale-105 disabled:opacity-50"
       onclick="sendRequest()">Roast 🌶️</button>
-    <div class="flex flex-row justify-center space-x-4">
-      <div id="screenshot" class="w-full bg-yellow-200 rounded-md flex justify-center hidden">
-        <div class="loading flex justify-center my-4 hidden">
+    <div class="w-full flex flex-row justify-center space-x-4 items-start">
+      <div id="screenshot" class="w-1/2 bg-yellow-200 rounded-md flex justify-center hidden">
+        <div class="loading flex justify-center my-4">
           <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-pink-500"></div>
           <span class="ml-2 w-full font-medium">Taking Screenshot...</span>
         </div>
         <img alt="Screenshot" class="w-fit object-cover p-2 bg-white hidden">
       </div>
-      <div id="response" class="w-full p-4 bg-green-100 rounded-md hidden">
-        <h2 class="text-2xl font-extrabold text-center mb-4 text-green-800">🚀 Tips for Supercharging the Website 🚀
+      <div id="response" class="w-1/2 p-4 bg-green-100 rounded-md hidden">
+        <h2 class="text-xl font-extrabold text-center mb-4 text-green-800">🚀 Tips for Supercharging the Website 🚀
         </h2>
         <div class="loading flex items-center justify-center my-4 hidden">
           <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-pink-500"></div>
           <span class="ml-2 text-pink-500 font-medium">Loading AI...</span>
         </div>
-        <p id="airesponse" class="list-disc list-inside text-lg text-pink-800">
-        </p>
+        <pre id="airesponse" class="list-disc list-inside text-lg text-pink-800 whitespace-pre-wrap">
+        </pre>
       </div>
     </div>
   </div>

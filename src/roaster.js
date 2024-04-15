@@ -23,8 +23,8 @@ export async function generateWebsiteEvaluation(screenshotUrl) {
                       5. SEO Practices: Are there any visible elements that could impact the website's search engine ranking, like heavy use of images over text or poor header structure?
                   - Expertise Level: Deliver the critique with a humorous yet informative tone, highlighting both the strengths and weaknesses in a balanced manner.
                   - Output Structure: Provide the critique in a structured paragraph format, with each aspect clearly addressed in sequence.
-                  Don't use any HTML for formatting.
-                  
+                  The output should be in plain text. Use whitespace to format it properly. Don't use double asterisk to denote bold.
+                  - Critique: Provide only actionable critique.
                   `,
                     },
                 ],

@@ -34,7 +34,7 @@ function sendRequest() {
                         console.log(new TextDecoder().decode(value));
                         // Otherwise do something here to process current chunk
                         document.querySelector("#response .loading").classList.add("hidden");
-                        document.querySelector("#response #airesponse").textContent += new TextDecoder().decode(value);
+                        document.querySelector("#response #airesponse").innerHTML += new TextDecoder().decode(value);
                         // Read some more, and call this function again
                         return reader.read().then(pump);
                     });
