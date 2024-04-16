@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon src/index.js",
-    "dev": "nodemon src/index.js",
+    "start": "pm2 start src/index.js && pm2 logs",
+    "dev": "pm2-dev start src/index.js",
     "cli": "node src/cli.js"
   },
   "author": "",

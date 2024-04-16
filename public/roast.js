@@ -24,8 +24,13 @@ function sendRequest() {
             document.querySelector("#response .loading").classList.remove("hidden");
             const roastStyle = document.querySelector("#roastStyle").value;
             fetch("/roast?url=" + encodeURIComponent(url) + "&roastStyle=" + encodeURIComponent(roastStyle))
-                // .then((response) => response.json())
-                .then((response) => {
+                .then(async (response) => {
+                    document.querySelector("#response .loading").classList.add("hidden");
+                    if (!response.ok) {
+                        document.querySelector("#response #airesponse").innerHTML = `Oh no, got an error from AI`
+                        console.error(await response.json());
+                        return;
+                    }
                     const reader = response.body.getReader();//.pipeThrough(new TextDecoderStream());
                     reader.read().then(function pump({ done, value }) {
                         if (done) {
@@ -34,7 +39,7 @@ function sendRequest() {
                         }
                         // console.log(new TextDecoder().decode(value));
                         // Otherwise do something here to process current chunk
-                        document.querySelector("#response .loading").classList.add("hidden");
+
                         document.querySelector("#response #airesponse").innerHTML += new TextDecoder().decode(value);
                         // Read some more, and call this function again
                         return reader.read().then(pump);

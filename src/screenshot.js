@@ -26,6 +26,8 @@ export async function takeScreenshot(url) {
         fullPage: true,
     });
 
+    const html = await page.content();
+
     await browser.close();
 
     const screenshotUrl = "data:image/png;base64, " + buffer.toString("base64");
@@ -33,7 +35,7 @@ export async function takeScreenshot(url) {
     // we only store one screenshot
     screenshotCache.clear();
     // Cache the screenshot
-    screenshotCache.set(url, screenshotUrl);
+    screenshotCache.set(url, { screenshotUrl, html });
 
-    return screenshotUrl;
+    return { screenshotUrl, html };
 }

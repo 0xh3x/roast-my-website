@@ -92,64 +92,92 @@ Actionable items based on the above aspects may include:
 7. Implement accessibility best practices to make the website inclusive.
 
 Remember to provide specific examples and recommendations when offering feedback to help the website owner understand and implement the necessary changes effectively.`,
-    d: `Sure, I'll create a comprehensive guide to help a junior designer effectively critique a website from a full-page screenshot. This will include aspects to observe and questions to consider, structured around key elements of visual website design.
+    d: `Use this guide: Comprehensive guide to help a junior designer effectively critique a website from a full-page screenshot. This will include aspects to observe and questions to consider, structured around key elements of visual website design.
 
-### Guide for Critiquing a Website Using a Full-Page Screenshot
+Guide for Critiquing a Website Using a Full-Page Screenshot
 
-#### 1. **Overall Visual Impression**
+1. **Overall Visual Impression**
    - **Aesthetics**: Does the website look modern or outdated? Is the design consistent with current web design trends?
    - **Theme Consistency**: Are the colors, fonts, and design elements consistent throughout the page?
    - **Branding**: How well does the website reflect the brand's identity? Consider logos, color schemes, and typography.
 
-#### 2. **Layout and Structure**
+2. **Layout and Structure**
    - **Navigation**: Is the navigation intuitive and easy to locate? Are the menu items clearly labeled?
    - **Content Hierarchy**: Is there a clear visual hierarchy that guides the viewer's eye through the page? Look for the use of headings, subheadings, and visual cues that organize content.
    - **Whitespace**: Does the design make good use of space? Is the content overcrowded or too sparse?
 
-#### 3. **Typography**
+3. **Typography**
    - **Readability**: Are the fonts easy to read? Consider size, color contrast, and font style.
    - **Font Choices**: Are the font styles appropriate for the web and the brand? How many different fonts are used, and is this number appropriate?
    - **Text Alignment and Spacing**: Is the text properly aligned and spaced? Check for consistent alignment and adequate spacing between lines and paragraphs.
 
-#### 4. **Color Scheme**
+4. **Color Scheme**
    - **Appeal and Accessibility**: Are the colors appealing and accessible? Consider whether the color choices ensure good contrast for readability.
    - **Consistency and Emotion**: Do the colors align with the emotional feel of the brand? Are they used consistently throughout the site?
    - **Overuse or Underuse**: Is there an overuse or underuse of colors which could lead to visual monotony or chaos?
 
-#### 5. **Imagery**
+5. **Imagery**
    - **Quality and Relevance**: Are the images high quality? Are they relevant to the content?
    - **Placement and Sizing**: Are images well-placed and appropriately sized? Do they enhance or distract from the content?
    - **Alt Text**: Consider if images likely have appropriate alt text, which is crucial for accessibility (though you cannot see alt text in a screenshot, mention the importance of checking this).
 
-#### 6. **Responsiveness**
+6. **Responsiveness**
    - **Adaptability**: While you can't test responsiveness with a screenshot, critique based on visible clues. Do elements look like they would scale or rearrange effectively on different devices?
 
-#### 7. **Call to Action (CTA)**
+7. **Call to Action (CTA)**
    - **Visibility**: Are CTAs prominently placed and easy to identify?
    - **Design**: Do the CTAs stand out due to their design and color? Are they inviting to click?
 
-#### 8. **User Interface Elements**
+8. **User Interface Elements**
    - **Consistency**: Are buttons, icons, and other interactive elements consistent in style and behavior?
    - **Functionality Indicators**: Do elements like links and buttons look clickable? Are interactive elements distinguishable from static ones?
 
-#### 9. **Accessibility**
+9. **Accessibility**
    - **Color Contrast**: Is there sufficient contrast between text and background colors to be easily readable by everyone, including those with visual impairments?
    - **Font Sizes**: Are font sizes adequate for readability across all devices?
 
-#### 10. **Final Assessment and Recommendations**
+10. **Final Assessment and Recommendations**
    - **Strengths**: Summarize the strong points of the website's design.
    - **Areas for Improvement**: List areas where the design could be improved.
    - **Actionable Suggestions**: Provide specific, actionable suggestions for each critique to help the web designer understand what changes are necessary.
 
 Structure the report clearly, separating observations into the categories above. Each criticism should be specific and backed by a visual reference from the screenshot when possible. Emphasize the importance of constructive criticism and actionable feedback to ensure that the report is useful to the web development team.`
+    , e: `This is The Website Visual Evaluation Checklist: Score the website for each checklist item.
+1. Overall Aesthetics
+1.1 Is the color scheme visually pleasing and consistent throughout the page? (0-5 points)
+1.2 Does the website use high-quality, relevant images that enhance the content? (0-5 points)
+1.3 Are the font styles and sizes appropriate and consistent, making the text easy to read? (0-5 points)
+2. Layout and Composition
+2.1 Is the layout logical and easy to follow? (0-5 points)
+2.2 Are the spacing and alignment of elements consistent throughout the website? (0-5 points)
+2.3 Does the design utilize the space effectively, neither too crowded nor too sparse? (0-5 points)
+3. Branding and Professionalism
+3.1 Does the design align with the brand's identity (colors, logos, fonts)? (0-5 points)
+3.2 Does the website convey a professional image appropriate for the brand? (0-5 points)
+4. User Interface and Navigation
+4.1 Are navigation elements (menus, buttons) clearly visible and understandable? (0-5 points)
+4.2 Are interactive elements (links, buttons) clearly distinguishable from non-interactive elements? (0-5 points)
+5. Accessibility
+5.1 Are text and background color contrasts sufficient for easy readability? (0-5 points)
+5.2 Are visual elements accessible with text alternatives (like alt text for images)? (0-5 points)
+6. Responsiveness and Mobile Compatibility
+6.1 Does the design appear as if it would scale well on different devices (considering only visual cues)? (0-5 points)
+7. Attention to Detail
+7.1 Are there any visible errors like typos, incorrect alignments, or pixelated images? (0-5 points)
+7.2 Does the design include refined details such as icons, micro-interactions, or animations that enhance user experience? (0-5 points)
+
+Assign a score for each item in the format of: (x/5 points).
+`
+
 }
-const youAre = `You are a website critique expert. You have been asked to evaluate the following website based on a screenshot. If some aspects of a website can't be determined with just a screenshot skip it.`;
-const outputFormat = `The output should be in plain text. Use whitespace to format it properly. Don't use double asterisk to denote bold.`;
+const youAre = `You are a website critique expert. You have been asked to evaluate the following website based on a screenshot and html. IMPORTANT: Only output what needs to be improved, no need to repot what's already good.`;// If some aspects of a website can't be determined with just a screenshot skip it.`;
+const outputFormat = `The output should be in plain text. Use whitespace to format it properly. Don't use double asterisk to denote bold or any other markdown syntax. IMPORTANT: Only output what needs to be improved, no need to repot what's already good.`;
 
-export async function generateWebsiteEvaluation(screenshotUrl, prompt = 'a') {
+export async function generateWebsiteEvaluation(screenshotUrl, html = undefined, prompt = 'a') {
     const openai = new OpenAI();
+    const textPrompt = html ? `This is the HTML of the website: ${html}` : "Evaluate this website";
 
-    const chatCompletion = await openai.chat.completions.create({
+    const config = {
         messages: [
             {
                 role: "system",
@@ -163,7 +191,7 @@ export async function generateWebsiteEvaluation(screenshotUrl, prompt = 'a') {
             {
                 role: "user",
                 content: [
-                    { type: "text", text: "Evaluate this website" },
+                    { type: "text", text: textPrompt },
                     {
                         type: "image_url",
                         image_url: screenshotUrl,
@@ -173,7 +201,9 @@ export async function generateWebsiteEvaluation(screenshotUrl, prompt = 'a') {
         ],
         model: "gpt-4-vision-preview",
         stream: true,
-    });
+    };
+    // console.log(JSON.stringify(config));
+    const chatCompletion = await openai.chat.completions.create(config);
 
     return chatCompletion;
 }

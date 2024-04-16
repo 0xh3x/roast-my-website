@@ -18,9 +18,8 @@ app.get("/screenshot", async (req, res) => {
     return;
   }
   const { url } = req.query;
-  let screenshotUrl;
   try {
-    screenshotUrl = await takeScreenshot(url);
+    var { screenshotUrl, html } = await takeScreenshot(url);
     res.send({ screenshot: screenshotUrl });
   } catch (error) {
     console.error(`Error taking screenshot of ${url}:`, error);
@@ -40,9 +39,8 @@ app.get("/roast", async (req, res) => {
   // get website screenshot
   const { url } = req.query;
   const roastStyle = req.query.roastStyle || 'a';
-  let screenshotUrl;
   try {
-    screenshotUrl = await takeScreenshot(url);
+    var { screenshotUrl, html } = await takeScreenshot(url);
   } catch (error) {
     console.error(`Error taking screenshot of ${url}:`, error);
     res
@@ -52,12 +50,12 @@ app.get("/roast", async (req, res) => {
   }
   // roast the website
   try {
+    // console.log({ html });
+    const chatCompletion = await generateWebsiteEvaluation(screenshotUrl, html, roastStyle);
+
     res.writeHead(200, {
       "Content-Type": "text/plain; charset=utf-8",
     });
-
-    const chatCompletion = await generateWebsiteEvaluation(screenshotUrl, roastStyle);
-
     for await (const chunk of chatCompletion) {
       const [choice] = chunk.choices;
       const { content } = choice.delta;
@@ -68,6 +66,7 @@ app.get("/roast", async (req, res) => {
   } catch (error) {
     console.error("Error handling AI response:", error);
     res.status(500).send({ msg: "Error handling AI response", error: error });
+    res.end();
   }
 });
 
