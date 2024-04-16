@@ -39,6 +39,7 @@ app.get("/roast", async (req, res) => {
   }
   // get website screenshot
   const { url } = req.query;
+  const roastStyle = req.query.roastStyle || 'a';
   let screenshotUrl;
   try {
     screenshotUrl = await takeScreenshot(url);
@@ -55,7 +56,7 @@ app.get("/roast", async (req, res) => {
       "Content-Type": "text/plain; charset=utf-8",
     });
 
-    const chatCompletion = await generateWebsiteEvaluation(screenshotUrl);
+    const chatCompletion = await generateWebsiteEvaluation(screenshotUrl, roastStyle);
 
     for await (const chunk of chatCompletion) {
       const [choice] = chunk.choices;

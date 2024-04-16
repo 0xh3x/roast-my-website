@@ -16,9 +16,23 @@
   <div class="p-6 w-3/4 mx-auto bg-pink-200 rounded-xl shadow-md flex flex-col items-center space-y-4">
     <input id="urlInput" value="https://www.aimerce.ai/" type="text" placeholder="Enter URL"
       class="w-3/4 p-3 rounded border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-600">
-    <button id="roastBtn"
-      class="bg-purple-500 text-white px-6 py-3 rounded-full hover:bg-purple-600 transition duration-300 transform hover:scale-105 disabled:opacity-50"
-      onclick="sendRequest()">Roast 🌶️</button>
+
+    <div class="flex flex-row justify-center space-x-4 mb-4">
+      <button id="roastBtn"
+        class="bg-purple-500 text-white px-6 py-3 rounded-full hover:bg-purple-600 transition duration-300 transform hover:scale-105 disabled:opacity-50"
+        onclick="sendRequest()">Roast 🌶️</button>
+
+      <div class="flex flex-col">
+        <label for="roastStyle" class="text-lg font-medium text-purple-800 mb-2">Roast Style:</label>
+        <select id="roastStyle" class="rounded border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-600">
+          <option value="a">Humorous & Informative</option>
+          <option value="b">Detailed & Actionable</option>
+          <option value="c">Constructive Criticism</option>
+          <option value="d">Junior Designer</option>
+        </select>
+      </div>
+    </div>
+
     <div class="w-full flex flex-row justify-center space-x-4 items-start">
       <div id="screenshot" class="w-1/2 bg-yellow-200 rounded-md flex justify-center hidden">
         <div class="loading flex justify-center my-4">

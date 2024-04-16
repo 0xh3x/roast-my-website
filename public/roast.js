@@ -22,16 +22,17 @@ function sendRequest() {
         .then((data) => {
             document.querySelector("#response").classList.remove("hidden");
             document.querySelector("#response .loading").classList.remove("hidden");
-            fetch("/roast?url=" + encodeURIComponent(url))
+            const roastStyle = document.querySelector("#roastStyle").value;
+            fetch("/roast?url=" + encodeURIComponent(url) + "&roastStyle=" + encodeURIComponent(roastStyle))
                 // .then((response) => response.json())
                 .then((response) => {
                     const reader = response.body.getReader();//.pipeThrough(new TextDecoderStream());
                     reader.read().then(function pump({ done, value }) {
                         if (done) {
-                            console.log("done");
+                            // console.log("done");
                             return;
                         }
-                        console.log(new TextDecoder().decode(value));
+                        // console.log(new TextDecoder().decode(value));
                         // Otherwise do something here to process current chunk
                         document.querySelector("#response .loading").classList.add("hidden");
                         document.querySelector("#response #airesponse").innerHTML += new TextDecoder().decode(value);
