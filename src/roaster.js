@@ -175,7 +175,7 @@ const outputFormat = `The output should be in plain text. Use whitespace to form
 
 export async function generateWebsiteEvaluation(screenshotUrl, html = undefined, prompt = 'a') {
     const openai = new OpenAI();
-    const textPrompt = html ? `This is the HTML of the website: ${html}` : "Evaluate this website";
+    const textPrompt = html && html.length < 40000 ? `This is the HTML of the website: ${html}` : "Evaluate this website";
 
     const config = {
         messages: [
