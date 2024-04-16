@@ -166,7 +166,7 @@ Structure the report clearly, separating observations into the categories above.
 7.1 Are there any visible errors like typos, incorrect alignments, or pixelated images? (0-5 points)
 7.2 Does the design include refined details such as icons, micro-interactions, or animations that enhance user experience? (0-5 points)
 
-Assign a score for each item in the format of: (x/5 points).
+Assign a score for each item in the format of: (x/5 points), write justification of the score and give actionable advices on how to improve it.
 `
 
 }
